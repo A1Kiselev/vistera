@@ -1,7 +1,9 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { getPipes } from "../util.ts";
+import { getPipes, ListType } from "../util.ts";
+import { FieldRenderProps, useForm } from "react-final-form";
 
-const PipeAutocomplete = () => {
+const PipeAutocomplete = ({ input }: FieldRenderProps<ListType>) => {
+  const form = useForm();
   const pipeOptions = getPipes();
 
   return (
@@ -9,7 +11,7 @@ const PipeAutocomplete = () => {
       options={pipeOptions}
       getOptionLabel={(option) => option.name}
       renderInput={(params) => <TextField {...params} label={'Pipe'} />}
-      onChange={() => {}}     // add function to remember chosen pipe
+      onChange={(_event, value) => form.change(input.name, value)}
     />
   )
 }

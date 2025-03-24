@@ -1,7 +1,9 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { getFrames } from "../util.ts";
+import { getFrames, ListType } from "../util.ts";
+import { FieldRenderProps, useForm } from "react-final-form";
 
-const FrameAutocomplete = () => {
+const FrameAutocomplete = ({ input }: FieldRenderProps<ListType>) => {
+  const form = useForm();
   const frameOptions = getFrames();
 
   return (
@@ -9,7 +11,7 @@ const FrameAutocomplete = () => {
       options={frameOptions}
       getOptionLabel={(option) => option.name}
       renderInput={(params) => <TextField {...params} label={'Frame'} />}
-      onChange={() => {}}     // add function to remember chosen frame
+      onChange={(_event, value) => form.change(input.name, value)}
     />
   )
 }

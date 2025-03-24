@@ -1,7 +1,7 @@
 import data from '../../DB/data.json';
 import config from '../../DB/config.json';
 
-interface ListType{
+export interface ListType{
   id: string,
   name: string,
   material: string,
@@ -18,7 +18,7 @@ export const getLists = (): Array<ListType> =>
     return { id: index.toString(), ...list } as ListType;
   });
 
-interface PipeType{
+export interface PipeType{
   id: string,
   name: string,
   unit: string,
@@ -34,7 +34,7 @@ export const getPipes = (): Array<PipeType> =>
     return {id: index.toString(), ...pipe} as PipeType;
   })
 
-interface FrameType{
+export interface FrameType{
   id: string,
   key: string,
   name: string,

@@ -1,7 +1,10 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { getLists } from "../util.ts";
 
-const ListAutocomplete = () => {
+import { getLists, ListType } from "../util.ts";
+import { FieldRenderProps, useForm } from "react-final-form";
+
+const ListAutocomplete = ({ input }: FieldRenderProps<ListType>) => {
+  const form = useForm();
   const listOptions = getLists();
 
   return (
@@ -9,7 +12,7 @@ const ListAutocomplete = () => {
       options={listOptions}
       getOptionLabel={(option) => option.name}
       renderInput={(params) => <TextField {...params} label={'List'} />}
-      onChange={() => {}}     // add function to remember chosen list
+      onChange={(_event, value) => form.change(input.name, value)}
     />
   )
 }
