@@ -1,10 +1,8 @@
-// import staffFixes from '../../DB/staff/fixes.json';
 import lists from '../../DB/staff/lists.json';
 import pipes from '../../DB/staff/pipes.json';
 import frames from '../../DB/config/frames.json';
-// import materials from '../../DB/config/materials.json';
+import materials from '../../DB/config/materials.json';
 import sizes from '../../DB/config/sizes.json';
-// import configFixes from '../../DB/config/fixes.json';
 
 export interface ListType{
   name: string,
@@ -47,10 +45,22 @@ export const getFrames = (): Array<FrameType> => frames.map((el) => {
   return frame as FrameType;
 })
 
+export interface MaterialType{
+  key: string,
+  name: string
+}
+export const getMaterials = (): Array<FrameType> => materials.map((el) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {type, ...frame} = el;
+
+  return frame as FrameType;
+})
+
 export enum OptionsType{
   List = 'list',
   Pipe = 'pipe',
-  Frame = 'frame'
+  Frame = 'frame',
+  Material = 'material'
 }
 export const getOptionsByType = (type: OptionsType): Array<FrameType | PipeType | ListType> => {
   switch (type) {
@@ -62,6 +72,9 @@ export const getOptionsByType = (type: OptionsType): Array<FrameType | PipeType 
     }
     case OptionsType.Frame:{
       return getFrames();
+    }
+    case OptionsType.Material:{
+      return getMaterials();
     }
   }
 }

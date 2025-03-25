@@ -3,14 +3,14 @@
     "type": "pipe",
     "name": "Труба 20х20",
     "unit": "мп",
-    "width": 20,
+    "width": 0.02,
     "price": 18
   },
   {
     "type": "pipe",
     "name": "Труба 30х30",
     "unit": "мп",
-    "width": 30,
+    "width": 0.03,
     "price": 18
   }
 ]

@@ -4,13 +4,15 @@ import { required } from "./validate.ts";
 import { OptionsType, SizeVariant } from "./util.ts";
 import AutoCompleteField from "./autocompleteField/AutoCompleteField.tsx";
 import NumberField from "./numberField/NumberField.tsx";
+import { StaffContextType } from "../context/StaffContext.tsx";
+import { Dispatch, SetStateAction } from "react";
 
-const Calculator = () => {
+const Calculator = ({ handleCalculate }: {handleCalculate: Dispatch<SetStateAction<StaffContextType | null>>}) => {
 
   return (
     <Paper elevation={5} sx={{ padding: 1, maxWidth: 700 }}>
       <Form
-        onSubmit={(values) => {console.log('submitValues ->> ', values);}}
+        onSubmit={(values) => handleCalculate(values as StaffContextType)}
         render={({ handleSubmit, submitting, invalid }) => (
           <form onSubmit={handleSubmit}>
             <Stack
@@ -34,13 +36,18 @@ const Calculator = () => {
                   <AutoCompleteField type={OptionsType.Frame} props={props} />
                 )}
               </Field>
+              <Field name={'material'} validate={required}>
+                {(props) => (
+                  <AutoCompleteField type={OptionsType.Material} props={props} />
+                )}
+              </Field>
 
-              <Field name={'width'}>
+              <Field name={'width'} value={required}>
                 {(props) => (
                   <NumberField variant={SizeVariant.Width} props={props} />
                 )}
               </Field>
-              <Field name={'length'}>
+              <Field name={'length'} validate={required}>
                 {(props) => (
                   <NumberField variant={SizeVariant.Length} props={props} />
                 )}
