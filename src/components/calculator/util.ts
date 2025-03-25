@@ -1,8 +1,12 @@
-import data from '../../DB/data.json';
-import config from '../../DB/config.json';
+// import staffFixes from '../../DB/staff/fixes.json';
+import lists from '../../DB/staff/lists.json';
+import pipes from '../../DB/staff/pipes.json';
+import frames from '../../DB/config/frames.json';
+// import materials from '../../DB/config/materials.json';
+import sizes from '../../DB/config/sizes.json';
+// import configFixes from '../../DB/config/fixes.json';
 
 export interface ListType{
-  id: string,
   name: string,
   material: string,
   unit: string,
@@ -10,39 +14,67 @@ export interface ListType{
   price: number
 }
 export const getLists = (): Array<ListType> =>
-  data.filter((el) => el.type === 'list')
-    .map((el, index) => {
+  lists.map((el) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { type, ...list } = el;
 
-    return { id: index.toString(), ...list } as ListType;
+    return list as ListType;
   });
 
 export interface PipeType{
-  id: string,
   name: string,
   unit: string,
   width: number,
   price: number
 }
 export const getPipes = (): Array<PipeType> =>
-  data.filter((el) => el.type === 'pipe')
-  .map((el, index) => {
+  pipes.map((el) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {type, ...pipe} = el;
 
-    return {id: index.toString(), ...pipe} as PipeType;
+    return pipe as PipeType;
   })
 
 export interface FrameType{
-  id: string,
   key: string,
   name: string,
   step: number
 }
-export const getFrames = (): Array<FrameType> => config.filter((el) => el.type === 'frame').map((el, index) => {
+export const getFrames = (): Array<FrameType> => frames.map((el) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {type, ...frame} = el;
 
-  return {id: index.toString(), ...frame} as FrameType;
+  return frame as FrameType;
 })
+
+export enum OptionsType{
+  List = 'list',
+  Pipe = 'pipe',
+  Frame = 'frame'
+}
+export const getOptionsByType = (type: OptionsType): Array<FrameType | PipeType | ListType> => {
+  switch (type) {
+    case OptionsType.List:{
+      return getLists();
+    }
+    case OptionsType.Pipe:{
+      return getPipes();
+    }
+    case OptionsType.Frame:{
+      return getFrames();
+    }
+  }
+}
+
+export enum SizeVariant{
+  Length = 'length',
+  Width = 'width'
+}
+export interface SizeType{
+  key: string,
+  name: string,
+  min: number,
+  max: number,
+  step: number
+}
+export const getSizeLimit = (key: SizeVariant): SizeType => sizes.find((el) => el.key === key) as SizeType;

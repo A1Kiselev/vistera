@@ -1,0 +1,12 @@
+[
+  {
+    "type": "material",
+    "key": "metal",
+    "name": "Метал"
+  },
+  {
+    "type": "material",
+    "key": "plastic",
+    "name": "Пластик"
+  }
+]

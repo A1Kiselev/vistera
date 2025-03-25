@@ -1,0 +1,20 @@
+[
+  {
+    "type": "frame",
+    "key": "light",
+    "name": "Легкая",
+    "step": 1.2
+  },
+  {
+    "type": "frame",
+    "key": "standard",
+    "name": "Стандартная",
+    "step": 1
+  },
+  {
+    "type": "frame",
+    "key": "strong",
+    "name": "Усиленная",
+    "step": 0.8
+  }
+]
